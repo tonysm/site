@@ -1,7 +1,28 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as types from './types';
+import {STATUSES} from "./types";
 
 Vue.use(Vuex)
+
+const fakeHttp = (data) => {
+    return new Promise((resolve) => {
+        // Pretend to be an AJAX request.
+        setTimeout(() => {
+            resolve(data);
+        }, 200);
+    })
+}
+
+const fakeCandidates = [
+    { id: 1, name: 'Maria da Silva', transparency: 50, city: 'Maceió', state: 'AL', position: 'Vereador', number: '12345', party: 'PX', ruling: ['Veganismo', 'Cultura', 'Urbanismo'] },
+    { id: 2, name: 'Maria da Silva', transparency: 30, city: 'Maceió', state: 'AL', position: 'Vereador', number: '12345', party: 'PX', ruling: ['Veganismo', 'Cultura', 'Urbanismo'] },
+    { id: 3, name: 'Maria da Silva', transparency: 50, city: 'Maceió', state: 'AL', position: 'Vereador', number: '12345', party: 'PX', ruling: ['Veganismo', 'Cultura', 'Urbanismo'] },
+    { id: 4, name: 'Maria da Silva', transparency: 98, city: 'Maceió', state: 'AL', position: 'Vereador', number: '12345', party: 'PX', ruling: ['Veganismo', 'Cultura', 'Urbanismo'] },
+    { id: 5, name: 'Maria da Silva', transparency: 90, city: 'Maceió', state: 'AL', position: 'Vereador', number: '12345', party: 'PX', ruling: ['Veganismo', 'Cultura', 'Urbanismo'] },
+    { id: 6, name: 'Maria da Silva', transparency: 67, city: 'Maceió', state: 'AL', position: 'Vereador', number: '12345', party: 'PX', ruling: ['Veganismo', 'Cultura', 'Urbanismo'] },
+    { id: 7, name: 'Maria da Silva', transparency: 10, city: 'Maceió', state: 'AL', position: 'Vereador', number: '12345', party: 'PX', ruling: ['Veganismo', 'Cultura', 'Urbanismo'] },
+];
 
 export default new Vuex.Store({
     state: {
@@ -77,8 +98,45 @@ export default new Vuex.Store({
                 ]
             },
         ],
+        states: {
+            status: types.STATUSES.READY,
+            data: [],
+        },
+        candidates: {
+            status: types.STATUSES.READY,
+            data: [],
+        },
     },
-    mutations: {},
-    actions: {},
+    mutations: {
+        [types.MUTATIONS.SET_STATUS] (state, { module, status }) {
+            state[module].status = status;
+        },
+        [types.MUTATIONS.SET_STATES] (state, { states }) {
+            state.states.data = states;
+            state.states.status = STATUSES.READY;
+        },
+        [types.MUTATIONS.SET_CANDIDATES] (state, { candidates }) {
+            state.candidates.data = candidates;
+            state.candidates.status = STATUSES.READY;
+        },
+    },
+    actions: {
+        [types.ACTIONS.LOAD_STATES] ({ commit }) {
+            commit(types.ACTION_CREATORS.setStatus({ module: 'states', status: STATUSES.LOADING }));
+
+            return fakeHttp(['AL'])
+                .then((data) => {
+                    commit(types.ACTION_CREATORS.setStates(data));
+                })
+        },
+        [types.ACTIONS.LOAD_CANDIDATES] ({ commit }) {
+            commit(types.ACTION_CREATORS.setStatus({ module: 'candidates', status: STATUSES.LOADING }));
+
+            return fakeHttp(fakeCandidates)
+                .then(data => {
+                    commit(types.ACTION_CREATORS.setCandidates(data));
+                });
+        },
+    },
     modules: {}
 })

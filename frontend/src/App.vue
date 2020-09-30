@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-flux-visitor">
+  <div class="bg-flux-visitor min-h-screen flex flex-col justify-between">
     <app-nav/>
-    <router-view/>
+    <router-view class="flex-1"/>
     <app-footer />
   </div>
 </template>

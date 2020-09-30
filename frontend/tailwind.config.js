@@ -6,6 +6,10 @@ module.exports = {
     purge: [],
     theme: {
         extend: {
+            fontSize: {
+                'xxs': '.5rem',
+            },
+
             colors: {
                 'flux-candidate': 'var(--color-flux-candidate)',
                 'flux-visitor': 'var(--color-flux-visitor)',

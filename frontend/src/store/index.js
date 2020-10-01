@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as types from './types';
-import {STATUSES} from "./types";
 
 Vue.use(Vuex)
 
@@ -106,6 +105,14 @@ export default new Vuex.Store({
             status: types.STATUSES.READY,
             data: [],
         },
+        cities: {
+            status: types.STATUSES.READY,
+            data: [],
+        },
+        positions: [
+            { label: 'Vereador', value: 'vereador' },
+            { label: 'Prefeito', value: 'prefeito' },
+        ],
     },
     mutations: {
         [types.MUTATIONS.SET_STATUS] (state, { module, status }) {
@@ -113,16 +120,28 @@ export default new Vuex.Store({
         },
         [types.MUTATIONS.SET_STATES] (state, { states }) {
             state.states.data = states;
-            state.states.status = STATUSES.READY;
+            state.states.status = types.STATUSES.READY;
         },
         [types.MUTATIONS.SET_CANDIDATES] (state, { candidates }) {
             state.candidates.data = candidates;
-            state.candidates.status = STATUSES.READY;
+            state.candidates.status = types.STATUSES.READY;
+        },
+        [types.MUTATIONS.SET_CITIES] (state, { cities }) {
+            state.cities.data = cities;
+            state.candidates.status = types.STATUSES.READY;
         },
     },
     actions: {
+        [types.ACTIONS.LOAD_CITIES] ({ commit }) {
+            commit(types.ACTION_CREATORS.setStatus({ module: 'cities', status: types.STATUSES.LOADING }));
+
+            return fakeHttp(['Maceió', 'Arapiraca'])
+                .then((data) => {
+                    commit(types.ACTION_CREATORS.setCities(data));
+                })
+        },
         [types.ACTIONS.LOAD_STATES] ({ commit }) {
-            commit(types.ACTION_CREATORS.setStatus({ module: 'states', status: STATUSES.LOADING }));
+            commit(types.ACTION_CREATORS.setStatus({ module: 'states', status: types.STATUSES.LOADING }));
 
             return fakeHttp(['AL'])
                 .then((data) => {
@@ -130,7 +149,7 @@ export default new Vuex.Store({
                 })
         },
         [types.ACTIONS.LOAD_CANDIDATES] ({ commit }) {
-            commit(types.ACTION_CREATORS.setStatus({ module: 'candidates', status: STATUSES.LOADING }));
+            commit(types.ACTION_CREATORS.setStatus({ module: 'candidates', status: types.STATUSES.LOADING }));
 
             return fakeHttp(fakeCandidates)
                 .then(data => {

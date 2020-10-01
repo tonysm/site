@@ -1,36 +1,69 @@
 <template>
   <div>
-    <div class="flex flex-wrap -mx-3 mb-6">
-      <div class="w-2/3 px-3 mb-6 md:mb-0">
-        <app-select-field
+    <div class="border-b mb-4">
+      <div class="p-8 pb-0 flex flex-wrap -mx-3">
+        <div class="w-2/3 px-3 md:mb-0">
+          <app-select-field
             :value="value.state"
             :options="states"
             placeholder="Estado"
             @change="(state) => $emit('input', {...value, state })"
-        />
-      </div>
-      <div class="w-1/3 px-3">
-        <app-text-field
+          />
+        </div>
+        <div class="w-1/3 px-3">
+          <app-text-field
             :value="value.year"
             type="year"
             @input="year => $emit('input', {...value, year })"
+          />
+        </div>
+      </div>
+    </div>
+    
+    <div class="px-8 flex flex-wrap -mx-3" v-if="value.state">
+      <div class="w-2/3 px-3 md:mb-0">
+        <app-select-field
+          :value="value.city"
+          :options="cities"
+          placeholder="Cidade"
+          @change="(city) => $emit('input', { ...value, city })"
         />
       </div>
+      <div class="w-1/3 px-3">
+        <app-select-field
+          :value="value.position"
+          :options="positions"
+          placeholder="Cargo"
+          @change="(position) => $emit('input', { ...value, position })"
+        >
+        </app-select-field>
+      </div>
+    </div>
+
+    <div class="mb-4 px-8 py-2 pb-0">
+      <app-tags-field
+        :value="value.tags"
+        :options="tags"
+        @input="(selectedTags) => $emit('input', { ...value, tags: selectedTags })"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 import AppSelectField from '@/components/SelectField.vue';
 import AppTextField from '@/components/TextField.vue';
+import AppTagsField from '@/components/TagsField.vue';
+import { ACTIONS } from '@/store/types';
 
 export default {
   name: "CandidatesFilter",
   components: {
     AppSelectField,
     AppTextField,
+    AppTagsField,
   },
   props: {
     value: Object,
@@ -38,7 +71,26 @@ export default {
   computed: {
     ...mapState({
       states: (state) => state.states.data,
-    })
-  }
+      cities: (state) => state.cities.data,
+      positions: (state) => state.positions,
+      tags: () => [
+        'Urbanismo',
+        'Veganismo',
+        'Ciclismo',
+      ]
+    }),
+  },
+  watch: {
+    'value.state'(newVal, oldVal) {
+      if (newVal && newVal !== oldVal) {
+        this.loadCities();
+      }
+    },
+  },
+  methods: {
+    ...mapActions({
+      loadCities: ACTIONS.LOAD_CITIES,
+    }),
+  },
 }
 </script>

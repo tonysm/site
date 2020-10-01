@@ -9,7 +9,7 @@
   >
     <p class="text-secondary-button text-xxs sm:text-xs text-center flex align-middle items-center justify-center space-x-1">
       <span
-          class="inline-block rounded-full h-5 w-5 flex items-center justify-center"
+          class="rounded-full h-5 w-5 flex items-center justify-center"
           :class="{
           'bg-red': candidate.transparency < 50,
           'bg-yellow-50': candidate.transparency >= 50 && candidate.transparency < 90,

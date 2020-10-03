@@ -1,12 +1,12 @@
 <template>
   <div class="font-sans leading-loose overflow-hidden">
     <!-- Filters -->
-    <section class="max-w-4xl mx-auto border-b text-sm sm:text-lg text-text">
+    <section class="w-full sm:max-w-4xl mx-auto border-b text-sm sm:text-lg text-text">
       <app-candidates-filter v-model="filters"/>
     </section>
     <!-- End of Filters -->
 
-    <section class="max-w-4xl mx-auto p-8 grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+    <section class="mt-4 px-4 max-w-4xl mx-auto grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
       <app-candidate-card
           v-for="candidate in candidates"
           :key="candidate.id"

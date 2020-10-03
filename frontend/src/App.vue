@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-flux-visitor min-h-screen flex flex-col justify-between">
+  <div class="bg-flux-visitor min-h-screen flex flex-col relative justify-between">
     <app-nav/>
     <router-view class="flex-1"/>
     <app-footer />

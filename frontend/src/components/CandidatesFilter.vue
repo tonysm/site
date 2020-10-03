@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="border-b mb-4">
-      <div class="p-8 pb-0 flex flex-wrap -mx-3">
-        <div class="w-2/3 px-3 md:mb-0">
+      <div class="p-4 pb-0 flex flex-wrap">
+        <div class="w-2/3 md:mb-0">
           <app-select-field
             :value="value.state"
             :options="states"
@@ -10,7 +10,7 @@
             @change="(state) => $emit('input', {...value, state })"
           />
         </div>
-        <div class="w-1/3 px-3">
+        <div class="w-1/3 pl-3">
           <app-text-field
             :value="value.year"
             type="year"
@@ -20,8 +20,8 @@
       </div>
     </div>
     
-    <div class="px-8 flex flex-wrap -mx-3" v-if="value.state">
-      <div class="w-2/3 px-3 md:mb-0">
+    <div class="px-4 mb-4 flex flex-wrap" v-if="value.state">
+      <div class="w-2/3 md:mb-0">
         <app-select-field
           :value="value.city"
           :options="cities"
@@ -29,7 +29,7 @@
           @change="(city) => $emit('input', { ...value, city })"
         />
       </div>
-      <div class="w-1/3 px-3">
+      <div class="w-1/3 pl-3">
         <app-select-field
           :value="value.position"
           :options="positions"
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div class="mb-4 px-8 py-2 pb-0">
+    <div class="px-4 pb-2 pb-2">
       <app-tags-field
         :value="value.tags"
         :options="tags"

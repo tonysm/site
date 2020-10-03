@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Sobre from '../views/Sobre.vue'
 import SouCandidato from '../views/SouCandidato.vue'
+import UpdateCandidato from "@/views/UpdateCandidato";
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/sou-candidato',
     name: 'SouCandidato',
     component: SouCandidato
+  },
+  {
+    path: '/atualizar-candidato',
+    name: 'EditCandidato',
+    component: UpdateCandidato,
   },
 ]
 

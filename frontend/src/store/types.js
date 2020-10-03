@@ -8,6 +8,7 @@ export const ACTIONS = {
     LOAD_STATES: 'LOAD_STATES',
     LOAD_CITIES: 'LOAD_CITIES',
     LOAD_CANDIDATES: 'LOAD_CANDIDATES',
+    REQUEST_CANDIDATE_ACCESS: 'REQUEST_CANDIDATE_ACCESS',
 };
 
 export const MUTATIONS = {
@@ -19,6 +20,7 @@ export const MUTATIONS = {
 
 export const ACTION_CREATORS = {
     loadStates: () => ({ type: ACTIONS.LOAD_STATES }),
+    requestAccess: (email = '') => ({ type: ACTIONS.REQUEST_CANDIDATE_ACCESS, email }),
     setStatus: ({ module, status }) => ({ type: MUTATIONS.SET_STATUS, module, status}),
     setStates: (states = []) => ({ type: MUTATIONS.SET_STATES, states }),
     setCities: (cities = []) => ({ type: MUTATIONS.SET_CITIES, cities }),

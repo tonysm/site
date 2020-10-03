@@ -156,6 +156,9 @@ export default new Vuex.Store({
                     commit(types.ACTION_CREATORS.setCandidates(data));
                 });
         },
+        [types.ACTIONS.REQUEST_CANDIDATE_ACCESS] (_ctx, { email }) {
+            return fakeHttp(email);
+        },
     },
     modules: {}
 })

@@ -3,7 +3,7 @@
     <div class="-mx-3 mb-2">
         <div class="w-full px-3 md:mb-0 relative">
           <div class="w-full relative">
-            <button @click.prevent="isOpen = !isOpen" class="w-full p-2 pl-4 leading-6 rounded bg-white text-disabled-button border border-border-button hover:border-gray-500">
+            <button @click.prevent="isOpen = !isOpen" class="shadow w-full p-3 pl-4 leading-6 rounded bg-white text-disabled-button border border-border-button hover:border-gray-500">
                 Pautas
             </button>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -18,7 +18,7 @@
                 <button
                   v-for="option in remainingOptions"
                   :key="option"
-                  class="w-full px-2 py-4 bg-white"
+                  class="w-full p-2 bg-white"
                   @click.prevent="$emit('input', [...value, option])"
                 >{{ option }}</button>
                 <div class="w-full text-center text-xs px-2 py-4 bg-white" v-if="remainingOptions.length === 0">

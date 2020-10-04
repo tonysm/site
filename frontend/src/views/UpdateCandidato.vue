@@ -31,12 +31,13 @@
         <div>
           <app-checkbox v-model="termosDeUso.aceito">Li e aceito os termos de uso.</app-checkbox>
         </div>
-        <button
-            class="p-2 rounded w-full text-white"
-            :class="{'bg-disabled-button': !termosDeUso.aceito, 'bg-primary-button': termosDeUso.aceito}"
+        <app-primary-button
+            :disabled="termosDeUso.aceito"
             type="submit"
-        >Concordar
-        </button>
+            class="w-full"
+        >
+          Concordar
+        </app-primary-button>
       </form>
     </section>
     <!-- End of Termos de Uso -->
@@ -85,6 +86,22 @@
             :options="tags"
             :max="2"
         />
+        <app-textarea
+            v-model="form.biography"
+            label="BIOGRAFIA (MÁX 500 CARACTERES):"
+            id="bio"
+        />
+        <app-textarea
+            v-model="form.description"
+            label="PROPOSTAS (MÁX 500 CARACTERES):"
+
+        />
+        <app-primary-button
+            type="submit"
+            class="w-full"
+        >
+          Salvar perfil
+        </app-primary-button>
       </form>
     </section>
     <!-- End of Update Candidato -->
@@ -98,6 +115,8 @@ import AppLogoLight from '@/components/LogoLight.vue';
 import AppCheckbox from '@/components/Checkbox.vue';
 import AppTextField from '@/components/TextField.vue';
 import AppTagsField from '@/components/TagsField.vue';
+import AppTextarea from '@/components/TextArea.vue';
+import AppPrimaryButton from '@/components/ButtonPrimary.vue';
 
 export default {
   name: 'Home',
@@ -106,6 +125,8 @@ export default {
     AppCheckbox,
     AppTextField,
     AppTagsField,
+    AppTextarea,
+    AppPrimaryButton,
   },
   data() {
     return {

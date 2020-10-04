@@ -73,11 +73,7 @@ export default {
       states: (state) => state.states.data,
       cities: (state) => state.cities.data,
       positions: (state) => state.positions,
-      tags: () => [
-        'Urbanismo',
-        'Veganismo',
-        'Ciclismo',
-      ]
+      tags: (state) => state.tags,
     }),
   },
   watch: {

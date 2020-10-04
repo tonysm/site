@@ -113,6 +113,11 @@ export default new Vuex.Store({
             { label: 'Vereador', value: 'vereador' },
             { label: 'Prefeito', value: 'prefeito' },
         ],
+        tags: [
+            'Urbanismo',
+            'Veganismo',
+            'Ciclismo',
+        ],
     },
     mutations: {
         [types.MUTATIONS.SET_STATUS] (state, { module, status }) {

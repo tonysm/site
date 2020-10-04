@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label v-if="label" class="block text-disabled-button text-sm font-bold mb-2" :id="$attrs['id']">
+    <label v-if="label" class="block text-sm font-bold mb-2" :id="$attrs['id']">
       {{ label }}
     </label>
     <input

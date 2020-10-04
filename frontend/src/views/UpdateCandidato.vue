@@ -60,7 +60,7 @@
         Para ter um perfil completo no candidatos.info, adicione ou edite suas informações:
       </p>
 
-      <form @submit.prevent="updateCandidate" class="flex flex-col space-y-6">
+      <form @submit.prevent="updateCandidate" class="flex flex-col space-y-6 text-secondary-button">
         <app-text-field
             label="NOME:"
             :value="user.nome"

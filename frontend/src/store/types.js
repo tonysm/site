@@ -10,6 +10,7 @@ export const ACTIONS = {
     LOAD_CANDIDATES: 'LOAD_CANDIDATES',
     REQUEST_CANDIDATE_ACCESS: 'REQUEST_CANDIDATE_ACCESS',
     UPDATE_CANDIDATE: 'UPDATE_CANDIDATE',
+    SEND_MESSAGE: 'SEND_MESSAGE',
 };
 
 export const MUTATIONS = {
@@ -20,9 +21,13 @@ export const MUTATIONS = {
 };
 
 export const ACTION_CREATORS = {
+    sendMessage: ({type, subject, description}) => ({
+        type: ACTIONS.SEND_MESSAGE,
+        message: {type, subject, description}
+    }),
     loadStates: () => ({type: ACTIONS.LOAD_STATES}),
     requestAccess: (email = '') => ({type: ACTIONS.REQUEST_CANDIDATE_ACCESS, email}),
-    updateCandidate: ({ biography, description, tags = [], contato: {link, social_network},}) => ({
+    updateCandidate: ({biography, description, tags = [], contato: {link, social_network},}) => ({
         type: ACTIONS.UPDATE_CANDIDATE, candidate: {
             contato: {link, social_network},
             biography,

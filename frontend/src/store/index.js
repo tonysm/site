@@ -167,6 +167,9 @@ export default new Vuex.Store({
         [types.ACTIONS.UPDATE_CANDIDATE] (_ctx, { candidate }) {
             return fakeHttp(candidate);
         },
+        [types.ACTIONS.SEND_MESSAGE] (_ctx, { message }) {
+            return fakeHttp(message);
+        },
     },
     modules: {}
 })

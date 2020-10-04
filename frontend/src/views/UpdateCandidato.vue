@@ -105,6 +105,15 @@
       </form>
     </section>
     <!-- End of Update Candidato -->
+
+    <!-- Fale Conosco Link -->
+    <section class="text-text text-xs max-w-4xl mx-auto flex flex-col space-y-6 p-8">
+      <p class="text-center">
+        Você tem denúncias a fazer sobre outro candidato, reclamações ou perguntas sobre o candidatos.info?
+        <br><router-link class="underline" to="fale-conosco">Fale conosco</router-link>
+      </p>
+    </section>
+    <!-- End of Fale Conosco Link -->
   </div>
 </template>
 

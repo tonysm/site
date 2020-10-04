@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="border-b mb-4">
+    <div class="border-b mb-4 pb-4">
       <div class="p-4 pb-0 flex flex-wrap">
         <div class="w-2/3 md:mb-0">
           <app-select-field

@@ -9,7 +9,7 @@ const fakeHttp = (data) => {
         // Pretend to be an AJAX request.
         setTimeout(() => {
             resolve(data);
-        }, 200);
+        }, 600);
     })
 }
 
@@ -163,6 +163,9 @@ export default new Vuex.Store({
         },
         [types.ACTIONS.REQUEST_CANDIDATE_ACCESS] (_ctx, { email }) {
             return fakeHttp(email);
+        },
+        [types.ACTIONS.UPDATE_CANDIDATE] (_ctx, { candidate }) {
+            return fakeHttp(candidate);
         },
     },
     modules: {}

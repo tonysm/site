@@ -18,19 +18,19 @@
         </p>
 
         <div>
-          <form @submit.prevent="sendRequest">
+          <form @submit.prevent="sendRequest" class="flex flex-col space-y-3">
             <app-text-field
                 v-model="form.email"
                 type="email"
                 placeholder="digite aqui seu e-email oficial"
             />
 
-            <button
-                class="p-2 rounded w-full text-white"
+            <app-primary-button
                 :class="{'bg-disabled-button': !form.email, 'bg-primary-button': form.email}"
-                :disabled="!form.email"
+                :disabled="!form.email || sending"
+                :loading="sending"
                 type="submit"
-            >Enviar</button>
+            >Enviar</app-primary-button>
           </form>
         </div>
       </section>
@@ -48,11 +48,13 @@
 
 <script>
 import AppTextField from '@/components/TextField.vue';
+import AppPrimaryButton from '@/components/ButtonPrimary.vue';
 import { ACTION_CREATORS } from '@/store/types';
 
 export default {
   name: "SouCandidato",
   components: {
+    AppPrimaryButton,
     AppTextField,
   },
   data() {

@@ -3,12 +3,13 @@
     <!-- Termos de Uso -->
     <section
         class="absolute text-white top-0 bottom-0 left-0 z-40 bg-secondary-button right-0 h-screen overflow-y-scroll mx-auto flex flex-col space-y-6 p-8 text-sm sm:text-lg"
-        v-if="!termosDeUso.confirmed">
+        v-if="!termosDeUso.confirmed"
+    >
       <div class="px-2 pb-4">
         <app-logo-light class="block h-10 w-auto mx-auto"/>
       </div>
 
-      <h3 class="text-xl text-center font-semibold">Termos de Uso</h3>
+      <h3 class="text-base text-center font-semibold">Termos de Uso</h3>
 
       <div class="p-4 text-sm bg-white text-text rounded overflow-hidden overflow-y-scroll"
            :style="{ 'height': '300px' }">
@@ -43,12 +44,16 @@
     <!-- End of Termos de Uso -->
 
     <!-- Update Candidato -->
-    <section class="text-text max-w-4xl mx-auto flex flex-col space-y-6 p-8">
-      <h3 class="text-xl text-center font-semibold">Perfil do Candidato</h3>
+    <section
+        class="text-text max-w-4xl mx-auto flex flex-col space-y-6 p-8"
+        v-if="!atualizado"
+    >
+      <h3 class="text-base text-center font-semibold">Perfil do Candidato</h3>
 
       <p class="text-sm">
         Bem-vindo candidato <strong>{{ user.email }}</strong> a sua página no candidatos.info.
-        <br>Seu link expira em 24 horas, toda vez que quiser realizar edição de conteúdo, denúncia ou replicar um denúncia, digite seu email na seção ”sou um candidato.”
+        <br>Seu link expira em 24 horas, toda vez que quiser realizar edição de conteúdo, denúncia ou replicar um
+        denúncia, digite seu email na seção ”sou um candidato.”
       </p>
 
       <p class="font-bold">
@@ -77,7 +82,7 @@
         <app-text-field
             label="Link para contato (telefone ou URL de rede social):"
             id="link"
-            :value="form.contact.link"
+            v-model="form.contato.link"
         />
         <app-tags-field
             v-model="form.tags"
@@ -99,26 +104,36 @@
         <app-primary-button
             type="submit"
             class="w-full"
+            :disabled="enviando"
+            :loading="enviando"
         >
           Salvar perfil
         </app-primary-button>
       </form>
+
+      <p class="mt-6 text-xs text-text text-center">
+        Você tem denúncias a fazer sobre outro candidato, reclamações ou perguntas sobre o candidatos.info?
+        <br>
+        <router-link class="underline" to="fale-conosco">Fale conosco</router-link>
+      </p>
     </section>
     <!-- End of Update Candidato -->
 
-    <!-- Fale Conosco Link -->
-    <section class="text-text text-xs max-w-4xl mx-auto flex flex-col space-y-6 p-8">
-      <p class="text-center">
-        Você tem denúncias a fazer sobre outro candidato, reclamações ou perguntas sobre o candidatos.info?
-        <br><router-link class="underline" to="fale-conosco">Fale conosco</router-link>
-      </p>
+    <!-- Confirmação -->
+    <section
+        class="text-text max-w-4xl mx-auto flex flex-col space-y-6 p-8"
+        v-if="atualizado"
+    >
+      <h3 class="text-base text-center font-semibold">Seus dados foram atualizados com sucesso!</h3>
+
+      <app-primary-link-button to="/">Ver meu perfil</app-primary-link-button>
     </section>
-    <!-- End of Fale Conosco Link -->
+    <!-- End Confirmação -->
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import {mapState} from 'vuex';
 
 import AppLogoLight from '@/components/LogoLight.vue';
 import AppCheckbox from '@/components/Checkbox.vue';
@@ -126,9 +141,11 @@ import AppTextField from '@/components/TextField.vue';
 import AppTagsField from '@/components/TagsField.vue';
 import AppTextarea from '@/components/TextArea.vue';
 import AppPrimaryButton from '@/components/ButtonPrimary.vue';
+import AppPrimaryLinkButton from '@/components/ButtonLinkPrimary.vue';
+import { ACTION_CREATORS } from "@/store/types";
 
 export default {
-  name: 'Home',
+  name: 'UpdateCandidato',
   components: {
     AppLogoLight,
     AppCheckbox,
@@ -136,6 +153,7 @@ export default {
     AppTagsField,
     AppTextarea,
     AppPrimaryButton,
+    AppPrimaryLinkButton,
   },
   data() {
     return {
@@ -143,6 +161,8 @@ export default {
         aceito: false,
         confirmed: true,
       },
+      enviando: false,
+      atualizado: false,
       user: {
         nome: 'John Doe',
         numero: '55555',
@@ -150,7 +170,7 @@ export default {
         email: 'john@example.com',
       },
       form: {
-        contact: {
+        contato: {
           link: '',
           // TODO: Figure out the social network out of the URL?
           social_network: null,
@@ -173,7 +193,15 @@ export default {
       this.termosDeUso.confirmed = true;
     },
     updateCandidate() {
-      alert('works');
+      this.enviando = true;
+
+      this.$store.dispatch(ACTION_CREATORS.updateCandidate(this.form))
+          .then(() => this.atualizado = true)
+          .finally(() => this.enviando = false)
+    },
+    goToProfile() {
+      alert('here');
+      this.$router.push({ name: 'Home' });
     }
   }
 }

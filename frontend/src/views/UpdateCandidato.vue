@@ -81,7 +81,12 @@
               id="link"
               v-model="form.contato.link"
           />
-          <app-tags-field
+          <app-textarea
+              v-model="form.biography"
+              label="BIOGRAFIA (MÁX 500 CARACTERES):"
+              id="bio"
+          />
+          <app-tags-autocomplete-field
               v-model="form.tags"
               label="PAUTAS-CHAVE:"
               id="tags"
@@ -89,14 +94,8 @@
               :max="2"
           />
           <app-textarea
-              v-model="form.biography"
-              label="BIOGRAFIA (MÁX 500 CARACTERES):"
-              id="bio"
-          />
-          <app-textarea
               v-model="form.description"
               label="PROPOSTAS (MÁX 500 CARACTERES):"
-
           />
           <app-primary-button
               type="submit"
@@ -135,7 +134,7 @@ import {mapState} from 'vuex';
 
 import AppLogoLight from '@/components/LogoLight.vue';
 import AppTextField from '@/components/TextField.vue';
-import AppTagsField from '@/components/TagsField.vue';
+import AppTagsAutocompleteField from '@/components/TagsAutocompleteField.vue';
 import AppTextarea from '@/components/TextArea.vue';
 import AppPrimaryButton from '@/components/ButtonPrimary.vue';
 import AppPrimaryLinkButton from '@/components/ButtonLinkPrimary.vue';
@@ -146,7 +145,7 @@ export default {
   components: {
     AppLogoLight,
     AppTextField,
-    AppTagsField,
+    AppTagsAutocompleteField,
     AppTextarea,
     AppPrimaryButton,
     AppPrimaryLinkButton,
@@ -172,7 +171,7 @@ export default {
         },
         biography: '',
         description: '',
-        tags: []
+        tags: [],
       }
     }
   },

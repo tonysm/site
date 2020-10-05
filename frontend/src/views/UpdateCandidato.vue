@@ -94,8 +94,10 @@
               :max="2"
           />
           <app-textarea
-              v-model="form.description"
-              label="PROPOSTAS (MÁX 500 CARACTERES):"
+              v-for="description in form.descriptions"
+              :key="description.tag"
+              v-model="description.description"
+              :label="`PROPOSTAS SOBRE ${description.tag.toUpperCase()} (MÁX 200 CARACTERES):`"
           />
           <app-primary-button
               type="submit"
@@ -170,8 +172,27 @@ export default {
           social_network: null,
         },
         biography: '',
-        description: '',
+        descriptions: [],
         tags: [],
+      }
+    }
+  },
+  watch: {
+    'form.tags' (newTags, oldTags) {
+      const adding = newTags.length > oldTags.length;
+
+      if (adding) {
+        this.form.descriptions.push({
+          tag: newTags[newTags.length - 1],
+          description: '',
+        });
+      } else {
+        const missingTag = oldTags.find(tag => ! newTags.includes(tag));
+        const index = this.form.descriptions.findIndex(({ tag }) => tag == missingTag);
+
+        if (index !== -1) {
+          this.form.descriptions.splice(index, 1);
+        }
       }
     }
   },

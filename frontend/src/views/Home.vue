@@ -7,11 +7,9 @@
     <!-- End of Filters -->
 
     <section class="mt-4 px-4 max-w-4xl mx-auto grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
-      <app-candidate-card
-          v-for="candidate in candidates"
-          :key="candidate.id"
-          :candidate="candidate"
-      />
+      <router-link :to="`/candidatos/${candidate.id}`" v-for="candidate in candidates" :key="candidate.id">
+        <app-candidate-card :candidate="candidate" />
+      </router-link>
     </section>
     <div class="text-center text-sm text-text">
       <button @click.prevent="loadMore" class="inline-flex items-center space-x-2 p-2">

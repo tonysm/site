@@ -3,8 +3,9 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Sobre from '../views/Sobre.vue'
 import SouCandidato from '../views/SouCandidato.vue'
-import UpdateCandidato from "@/views/UpdateCandidato";
-import FaleConosco from "@/views/FaleConosco";
+import UpdateCandidato from '@/views/UpdateCandidato.vue';
+import FaleConosco from '@/views/FaleConosco.vue';
+import Candidato from "@/views/Candidato.vue";
 
 Vue.use(VueRouter)
 
@@ -13,6 +14,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/candidatos/:id',
+    name: 'Candidato',
+    component: Candidato,
   },
   {
     path: '/sobre',
@@ -39,7 +45,10 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior () {
+    return { x: 0, y: 0 }
+  }
 })
 
 export default router

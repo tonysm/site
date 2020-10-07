@@ -1,10 +1,110 @@
+{{define "primary-button"}}
+<button class="px-4 py-2 bg-indigo-700">{{.}}</button>
+{{end}}
 {{define "layout.html"}}
 <!DOCTYPE html>
 <html>
 <head>
     <title>{{template "title" .}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script>
+    <style>
+        /** These are the base colors from the design system. */
+        :root {
+            --color-flux-candidate: #E6F5FF;
+            --color-flux-visitor: #F7FAFC;
+            --color-primary-button: #0795FB;
+            --color-secondary-button: #4975A9;
+            --color-disabled-button: #97AECA;
+            --color-border-button: #83CAFD;
+            --color-disabled-field: #E5E5E5;
+            --color-green-100: #21B290;
+            --color-green-50: #8ACD8F;
+            --color-yellow-50: #FFEB39;
+            --color-text: #0A446B;
+            --color-red: #EB1111;
+            --color-orange-25: #EE7C50;
+            --color-white: #fff;
+        }
+
+        /** Since we are using a pre-built version of TailwindCSS, we need to define some custom classes here */
+        .text-flux-candidate {
+            color: var(--color-flux-candidate);
+        }
+        .bg-flux-candidate {
+            background-color: var(--color-flux-candidate);
+        }
+        .bg-flux-visitor {
+            background-color: var(--color-flux-visitor);
+        }
+        .bg-primary-button {
+            background-color: var(--color-primary-button);
+        }
+        .text-primary-button {
+            color: var(--color-primary-button);
+        }
+        .bg-secondary-button {
+            background-color: var(--color-secondary-button);
+        }
+        .bg-primary-button {
+            color: var(--color-secondary-button);
+        }
+        .bg-disabled-button {
+            background-color: var(--color-disabled-button);
+        }
+        .text-disabled-button {
+            color: var(--color-disabled-button);
+        }
+        .bg-border-button {
+            background-color: var(--color-border-button);
+        }
+        .border-border-button {
+            border-color: var(--color-border-button);
+        }
+        .bg-disabled-field {
+            background-color: var(--color-disabled-button);
+        }
+        .border-green-100 {
+            border-color: var(--color-green-100);
+        }
+        .bg-green-100 {
+            background-color: var(--color-green-100);
+        }
+        .border-green-50 {
+            border-color: var(--color-green-50);
+        }
+        .bg-green-50 {
+            background-color: var(--color-green-50);
+        }
+        .bg-yellow-50 {
+            background-color: var(--color-yellow-50);
+        }
+        .border-yellow-50 {
+            border-color: var(--color-yellow-50);
+        }
+        .bg-text {
+            background-color: var(--color-text);
+        }
+        .text-text {
+            color: var(--color-text);
+        }
+        .bg-red {
+            background-color: var(--color-red);
+        }
+        .border-red {
+            border-color: var(--color-red);
+        }
+        .bg-orange-25 {
+            background-color: var(--color-orange-25);
+        }
+        .border-orange-25 {
+            border-color: var(--color-orange-25);
+        }
+        .text-xxs {
+            font-size: .5rem;
+        }
+    </style>
 </head>
 <body>
     <div
